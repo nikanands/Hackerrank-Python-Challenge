@@ -1,0 +1,311 @@
+1. The Minion Game
+
+vowels = set('AEIOU')
+
+
+def minion_game(string):
+    # your code goes here
+    player1 = 'Stuart'
+    playerPoint1 = 0
+    player2 = 'Kevin'
+    playerPoint2 = 0
+
+    for i in range(len(string)):
+        if string[i] in vowels:
+            playerPoint2 += len(string) - i
+        else:
+            playerPoint1 += len(string) - i
+
+    if playerPoint1 > playerPoint2:
+        print(player1, playerPoint1, sep=' ')
+    elif playerPoint1 == playerPoint2:
+        print('Draw')
+    else:
+        print(player2, playerPoint2, sep=' ')
+
+
+2. Merge The Tools
+
+def merge_the_tools(string, k):
+    # your code goes here
+    for idx in range(0, len(string), k):
+        u = ''
+        t = string[idx:idx + k]
+        for t_str in t:
+            if t_str not in u:
+                u += t_str
+        print(u)
+
+
+3. Time Delta
+
+import datetime
+
+def time_delta(t1, t2):
+    format = "%a %d %b %Y %H:%M:%S %z"
+    dt1 = datetime.datetime.strptime(t1, format)
+    dt2 = datetime.datetime.strptime(t2, format)
+    delta = dt1 - dt2
+
+    return str(abs(int(delta.total_seconds())))
+
+
+4. Find Angle MBC
+
+import math
+l1 = int(input())
+l2 = int(input())
+
+angle = math.atan(l1/l2)
+deg = round(math.degrees(angle))
+print(f'{deg}\u00b0')
+
+
+5. Word Counter
+
+from collections import Counter
+n = int(input())
+w = []
+for _ in range(n):
+    w.append(input())
+
+output = Counter(w)
+print(len(output))
+for _ in output.values():
+    print(_, end=' ')
+
+6. Compress The String
+
+from itertools import groupby
+
+grp = groupby(input())
+for k,v in grp:
+    t = tuple(v)
+    res = tuple((len(t), int(k)))
+    print(res, end=' ')
+
+
+7. Company Logo
+
+from collections import Counter
+
+if __name__ == '__main__':
+    s = input()
+    items = (Counter(sorted(s)))
+    for k,v in items.most_common(3):
+        print(k, v)
+
+
+8. Piling Up
+
+from collections import deque
+
+n = int(input())
+
+for i in range(n):
+
+        n = int(input())
+        d = deque(map(int, input().split()))
+
+        while (len(d) > 1 and d[0] >= d[1]):
+                d.popleft()
+        while (len(d) > 1 and d[-1] >= d[-2]):
+                d.pop()
+
+        if len(d) <= 1:
+                print('Yes')
+        else:
+                print('No')
+
+
+9. Triangle Quest 2
+
+for i in range(1,int(input())+1):
+    print(((10 ** i)//9) ** 2)
+
+
+10. Iterables and Iterators
+
+from itertools import combinations
+n = int(input())
+l = input().split()
+k = int(input())
+tup = tuple(combinations(l, k))
+count = 0
+for i in tup:
+    if 'a' in i:
+        count += 1
+print(count/len(tup))
+
+
+11. Classes Dealing With Comples Numbers
+
+import math
+
+class Complex(object):
+    def __init__(self, real, imaginary):
+        self.real = real
+        self.imaginary = imaginary
+        self.c = complex(real, imaginary)
+    def __add__(self, no):
+        _ = self.c + no.c
+        return Complex(_.real, _.imag)
+    def __sub__(self, no):
+        _ = self.c - no.c
+        return Complex(_.real, _.imag)
+    def __mul__(self, no):
+        _ = self.c * no.c
+        return Complex(_.real, _.imag)
+    def __truediv__(self, no):
+        _ = self.c / no.c
+        return Complex(_.real, _.imag)
+    def mod(self):
+        _ = abs(self.c)
+        return Complex(_.real, _.imag)
+    def __str__(self):
+        if self.imaginary == 0:
+            result = "%.2f+0.00i" % (self.real)
+        elif self.real == 0:
+            if self.imaginary >= 0:
+                result = "0.00+%.2fi" % (self.imaginary)
+            else:
+                result = "0.00-%.2fi" % (abs(self.imaginary))
+        elif self.imaginary > 0:
+            result = "%.2f+%.2fi" % (self.real, self.imaginary)
+        else:
+            result = "%.2f-%.2fi" % (self.real, abs(self.imaginary))
+        return result
+
+if __name__ == '__main__':
+    c = map(float, input().split())
+    d = map(float, input().split())
+    x = Complex(*c)
+    y = Complex(*d)
+    print(*map(str, [x+y, x-y, x*y, x/y, x.mod(), y.mod()]), sep='\n')
+
+
+12. Athelete Sort
+
+
+if __name__ == '__main__':
+    first_multiple_input = input().rstrip().split()
+
+    n = int(first_multiple_input[0])
+
+    m = int(first_multiple_input[1])
+
+    arr = []
+
+    for _ in range(n):
+        arr.append(list(map(int, input().rstrip().split())))
+
+    k = int(input().strip())
+    arr=sorted(arr, key=lambda x: x[k])
+    [print(*x) for x in arr]
+
+
+13. GINORTS
+
+l = input()
+
+sorted_string = sorted(l, key=lambda x: (x.isdigit(), x.isdigit() and int(x) % 2 == 0, x.isupper(), x))
+
+result_string = ''.join(sorted_string)
+
+print(result_string)
+
+
+14. Validating Email Addresses With a Filter
+
+import re
+def fun(s):
+    # return True if s is a valid email, else return False
+    return re.search(r'^[a-zA-Z0-9_-]+@[a-zA-Z0-9]+\.[a-zA-Z]{1,3}$', s)
+
+
+15. Reduce Function
+
+def product(fracs):
+    t = reduce(lambda x,y: x*y, fracs)# complete this line with a reduce statement
+    return t.numerator, t.denominator
+
+
+16. Regex Substitution
+
+def change(match):
+    return ' and ' if match.group(0) == ' && ' else ' or '
+
+pattern = '\s&&\s|\s\|\|\s'
+
+for i in range(int(input())):
+    inp = input()
+    res = re.sub(pattern, change, inp)
+    print(re.sub(pattern, change, res))
+
+
+17. Validating Credit Card Numbers
+
+import re
+
+n = int(input())
+for num in range(n):
+    case = input()
+    valid_card_pattern = re.compile(r'^(?!.*(\d)(-*\1){3,})([4-6][0-9]{3}-?([0-9]{4}-?){3})$')
+    if valid_card_pattern.match(case):
+        print('Valid')
+    else:
+        print('Invalid')
+
+
+18. Words Score
+
+n = int(input())
+m = input().split()
+s = 0
+for i in m:
+    c=0
+    for j in i:
+        if j in 'aeiouy':
+            c+=1
+    if c%2 == 0:
+        s+=2
+    else:
+        s+=1
+print(s)
+
+
+19. Default Arguments (Python 3)
+
+def print_from_stream(n, stream=EvenStream()):
+    if stream.current%2==0:
+        stream.current=0
+    for _ in range(n):
+        print(stream.get_next())
+
+
+20. Write A Function
+
+def is_leap(year):
+    leap = False
+    if((year % 400 == 0) or  (year % 100 != 0) and  (year % 4 == 0)):  
+        leap = True
+    else:
+        leap = False
+    
+    return leap
+
+
+21. No Idea!
+
+n, m = map(int, input().split())
+elements = [s for s in input().split()]
+likes_set = {s for s in input().split()}
+dislikes_set = {s for s in input().split()}
+score = sum([1 if n in likes_set else -1 if n in dislikes_set else 0 for n in elements])
+print(score)
+
+
+22. Triangle Quest
+
+for i in range(1,int(input())):
+    print((10 ** i)//9*i)
