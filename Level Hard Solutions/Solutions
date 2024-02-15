@@ -1,0 +1,40 @@
+1. Matrix Script
+
+matrix = list(zip(*matrix))
+encoded = ''.join([''.join(m) for m in matrix])
+decoded = re.sub(r'\b\W+\b', ' ', encoded)
+print(decoded)
+
+
+2. Validating Postal Code
+
+regex_integer_in_range = r"^[1-9]\d{3,5}$"    # Do not delete 'r'.
+regex_alternating_repetitive_digit_pair = r"(\d)(?=\d\1)"    # Do not delete 'r'.
+
+
+3. Maximize It
+
+def square(x):
+    return x**2
+    
+def _compute_smax(m, k_list, s_value, s_list):
+    if not k_list:
+        s_list.append(s_value % m)
+        return
+    
+    for val in k_list[0]:
+        _compute_smax(m, k_list[1:], val + s_value, s_list)
+        
+def compute_smax(m, klist):
+    s_list = []
+    _compute_smax(m, klist, 0, s_list)
+    return max(s_list)
+
+k, m = map(int, input().split())
+k_lists_squared = []
+for _ in range(k):
+    size, *array = map(int, input().split())
+    squared_list = list(map(square, array))
+    k_lists_squared.append(squared_list)
+
+print(compute_smax(m, k_lists_squared))
